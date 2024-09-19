@@ -1,17 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+
+import PlaceForm from '~/components/places/PlaceForm'
 
 export default function AddPlace() {
-  return (
-    <View style={styles.container}>
-      <Text>Add Place screen</Text>
-    </View>
-  );
+  return <PlaceForm />
 }
-
-export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 24,
-  },
-});
