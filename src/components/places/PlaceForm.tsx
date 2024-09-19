@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { View, Text, ScrollView } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 
+import ImagePicker from './ImagePicker'
+
 export default function PlaceForm() {
   const [enteredTitle, setEnteredTitle] = useState('')
 
@@ -18,6 +20,7 @@ export default function PlaceForm() {
           className='my-2 px-1 py-2 text-base border-b-primary700 border-b-2 bg-primary100'
         />
       </View>
+      <ImagePicker />
     </ScrollView>
   )
 }
