@@ -1,13 +1,29 @@
+import { NavigationProp, RouteProp, useIsFocused, useNavigation, useRoute } from '@react-navigation/native'
 import { getCurrentPositionAsync, useForegroundPermissions, PermissionStatus } from 'expo-location'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, Text, View } from 'react-native'
 import MapView, { Marker } from 'react-native-maps'
 
 import OutlinedButton from '../UI/OutlinedButton'
 
+import { RootStackParamList } from '~/navigation'
+
 export default function LocationPicker() {
   const [locationPermissionInformation, requestLocationPermission] = useForegroundPermissions()
   const [pickedLocation, setPickedLocation] = useState<{ latitude: number; longitude: number } | null>(null)
+  const naviatetion = useNavigation<NavigationProp<RootStackParamList>>()
+  const route = useRoute<RouteProp<RootStackParamList, 'AddPlace'>>()
+  const isFocused = useIsFocused()
+
+  useEffect(() => {
+    if (isFocused && route.params) {
+      const mapPickedLocation = { latitude: route.params.pickedLatitude, longitude: route.params.pickedLongitude }
+      setPickedLocation({
+        latitude: mapPickedLocation.latitude,
+        longitude: mapPickedLocation.longitude
+      })
+    }
+  }, [route, isFocused])
 
   const veryfyLocationPermission = async () => {
     if (locationPermissionInformation?.status === PermissionStatus.UNDETERMINED) {
@@ -32,7 +48,9 @@ export default function LocationPicker() {
       longitude: location.coords.longitude
     })
   }
-  const pickLocationOnMapHandler = () => {}
+  const pickLocationOnMapHandler = () => {
+    naviatetion.navigate('Map')
+  }
 
   return (
     <View className='gap-2'>
