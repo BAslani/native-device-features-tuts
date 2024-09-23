@@ -8,7 +8,11 @@ import OutlinedButton from '../UI/OutlinedButton'
 
 import { RootStackParamList } from '~/navigation'
 
-export default function LocationPicker() {
+type Props = {
+  onLocationPicked: (location: { latitude: number; longitude: number }) => void
+}
+
+export default function LocationPicker({ onLocationPicked }: Props) {
   const [locationPermissionInformation, requestLocationPermission] = useForegroundPermissions()
   const [pickedLocation, setPickedLocation] = useState<{ latitude: number; longitude: number } | null>(null)
   const naviatetion = useNavigation<NavigationProp<RootStackParamList>>()
@@ -24,6 +28,12 @@ export default function LocationPicker() {
       })
     }
   }, [route, isFocused])
+
+  useEffect(() => {
+    if (pickedLocation) {
+      onLocationPicked(pickedLocation)
+    }
+  }, [pickedLocation, onLocationPicked])
 
   const veryfyLocationPermission = async () => {
     if (locationPermissionInformation?.status === PermissionStatus.UNDETERMINED) {

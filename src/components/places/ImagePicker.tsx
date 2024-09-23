@@ -4,7 +4,11 @@ import { Alert, Image, Text, View } from 'react-native'
 
 import OutlinedButton from '../UI/OutlinedButton'
 
-export default function ImagePicker() {
+type Props = {
+  onImagePicked: (image: string) => void
+}
+
+export default function ImagePicker({ onImagePicked }: Props) {
   const [pickedImage, setPickedImage] = useState<string | null>(null)
   const [cameraPermissionInformation, requestCameraPermission] = useCameraPermissions()
 
@@ -32,6 +36,7 @@ export default function ImagePicker() {
     })
     if (!image.canceled) {
       setPickedImage(image.assets[0].uri)
+      onImagePicked(image.assets[0].uri)
     }
   }
   return (

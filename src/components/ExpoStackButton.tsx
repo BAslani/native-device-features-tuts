@@ -5,7 +5,7 @@ type ButtonProps = {
   title: string
 } & TouchableOpacityProps
 
-export const Button = forwardRef<TouchableOpacity, ButtonProps>(({ title, ...touchableProps }, ref) => {
+export const ExpoStackButton = forwardRef<TouchableOpacity, ButtonProps>(({ title, ...touchableProps }, ref) => {
   return (
     <TouchableOpacity ref={ref} {...touchableProps} className={`${styles.button} ${touchableProps.className}`}>
       <Text className={styles.buttonText}>{title}</Text>
