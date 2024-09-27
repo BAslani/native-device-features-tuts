@@ -6,7 +6,11 @@ import ImagePicker from './ImagePicker'
 import LocationPicker from './LocationPicker'
 import Button from '../UI/Button'
 
-export default function PlaceForm() {
+type Props = {
+  createPlaceHandler: (title: string, imageUri: string, location: { latitude: number; longitude: number }) => void
+}
+
+export default function PlaceForm({ createPlaceHandler }: Props) {
   const [enteredTitle, setEnteredTitle] = useState('')
   const [pickedImage, setPickedImage] = useState<string | null>(null)
   const [pickedLocation, setPickedLocation] = useState<{ latitude: number; longitude: number } | null>(null)
@@ -24,9 +28,12 @@ export default function PlaceForm() {
   }, [])
 
   const savePlaceHandler = () => {
-    console.log('Title:', enteredTitle)
-    console.log('Image:', pickedImage)
-    console.log('Location:', pickedLocation)
+    if (enteredTitle && pickedImage && pickedLocation) {
+      createPlaceHandler(enteredTitle, pickedImage, pickedLocation)
+      setEnteredTitle('')
+      setPickedImage(null)
+      setPickedLocation(null)
+    }
   }
   return (
     <ScrollView className='flex-1 p-6'>
