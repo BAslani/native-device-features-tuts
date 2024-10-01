@@ -4,7 +4,7 @@ export type Place = {
   imageUri: string
   address: string
   location: {
-    lat: number
-    lng: number
+    latitude: number
+    longitude: number
   }
 }

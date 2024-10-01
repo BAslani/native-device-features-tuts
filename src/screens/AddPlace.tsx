@@ -6,10 +6,15 @@ import { RootStackParamList } from '~/navigation'
 
 export default function AddPlace({ navigation }: { navigation: NavigationProp<RootStackParamList> }) {
   const createPlaceHandler = (title: string, imageUri: string, location: { latitude: number; longitude: number }) => {
-    console.log('Title:', title)
-    console.log('Image:', imageUri)
-    console.log('Location:', location)
-    navigation.navigate('AllPlaces')
+    navigation.navigate('AllPlaces', {
+      place: {
+        id: `${new Date().toString()} - ${Math.random()}`,
+        title,
+        imageUri,
+        address: 'No Address',
+        location
+      }
+    })
   }
   return <PlaceForm createPlaceHandler={createPlaceHandler} />
 }

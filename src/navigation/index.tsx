@@ -10,7 +10,15 @@ import IconButton from '~/components/UI/IconButton'
 import Map from '~/screens/Map'
 
 export type RootStackParamList = {
-  AllPlaces: undefined
+  AllPlaces: {
+    place: {
+      id: string
+      title: string
+      imageUri: string
+      address: string
+      location: { latitude: number; longitude: number }
+    }
+  }
   AddPlace: { pickedLatitude: number; pickedLongitude: number }
   Map: undefined
 }
