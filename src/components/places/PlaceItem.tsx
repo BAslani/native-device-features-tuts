@@ -10,11 +10,14 @@ type Props = {
 
 export default function PlaceItem({ place, onSelect }: Props) {
   return (
-    <Pressable onPress={onSelect}>
-      <Image source={{ uri: place.imageUri }} />
-      <View>
-        <Text>{place.title}</Text>
-        <Text>{place.address}</Text>
+    <Pressable
+      onPress={onSelect}
+      className='flex flex-row items-start justify-between rounded-md my-3 bg-primary500 shadow active:opacity-90'
+    >
+      <Image source={{ uri: place.imageUri }} className='flex-[1] rounded-tl-md rounded-bl-md h-[100px]' />
+      <View className='flex-[2] p-3'>
+        <Text className='font-bold text-lg color-gray-700'>{place.title}</Text>
+        <Text className='text-xs color-gray-700'>{place.address}</Text>
       </View>
     </Pressable>
   )

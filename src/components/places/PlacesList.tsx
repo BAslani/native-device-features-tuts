@@ -20,6 +20,7 @@ export default function PlacesList({ places }: Props) {
   }
   return (
     <FlatList
+      className='m-6'
       data={places}
       keyExtractor={item => item.id}
       renderItem={({ item }) => <PlaceItem place={item} onSelect={() => {}} />}
