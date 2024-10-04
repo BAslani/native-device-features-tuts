@@ -5,13 +5,13 @@ import { Place } from '~/types/types'
 
 type Props = {
   place: Place
-  onSelect: () => void
+  onSelect: (placeId: string) => void
 }
 
 export default function PlaceItem({ place, onSelect }: Props) {
   return (
     <Pressable
-      onPress={onSelect}
+      onPress={() => onSelect(place.id)}
       className='flex flex-row items-start justify-between rounded-md my-3 bg-primary500 shadow active:opacity-90'
     >
       <Image source={{ uri: place.imageUri }} className='flex-[1] rounded-tl-md rounded-bl-md h-[100px]' />

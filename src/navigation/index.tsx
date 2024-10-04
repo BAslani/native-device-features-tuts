@@ -8,6 +8,7 @@ import AllPlaces from '../screens/AllPlaces'
 
 import IconButton from '~/components/UI/IconButton'
 import Map from '~/screens/Map'
+import PlaceDetails from '~/screens/PlaceDetails'
 
 export type RootStackParamList = {
   AllPlaces: {
@@ -20,7 +21,8 @@ export type RootStackParamList = {
     }
   }
   AddPlace: { pickedLatitude: number; pickedLongitude: number }
-  Map: undefined
+  PlaceDetails: { placeId: string }
+  Map?: { initialLatitude: number; initialLongitude: number }
 }
 
 const Stack = createStackNavigator<RootStackParamList>()
@@ -64,6 +66,7 @@ export default function RootStack() {
           />
           <Stack.Screen name='AddPlace' component={AddOlace} options={{ title: 'Add a new Place' }} />
           <Stack.Screen name='Map' component={Map} options={{ title: 'Map' }} />
+          <Stack.Screen name='PlaceDetails' component={PlaceDetails} options={{ title: 'Place Details' }} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
