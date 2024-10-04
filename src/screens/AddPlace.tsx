@@ -1,5 +1,6 @@
 import { NavigationProp } from '@react-navigation/native'
 import React from 'react'
+import { addPlace } from 'utils/storage'
 
 import PlaceForm from '~/components/places/PlaceForm'
 import { RootStackParamList } from '~/navigation'
@@ -11,10 +12,13 @@ export default function AddPlace({ navigation }: { navigation: NavigationProp<Ro
     address: string,
     location: { latitude: number; longitude: number }
   ) => {
-    console.log('TITLE: ', title)
-    console.log('IMAGE: ', imageUri)
-    console.log('ADDRESS: ', address)
-    console.log('LOCATION: ', location)
+    addPlace({
+      id: `${new Date().toString()} - ${Math.random()}`,
+      title,
+      imageUri,
+      address,
+      location
+    })
 
     navigation.navigate('AllPlaces', {
       place: {
